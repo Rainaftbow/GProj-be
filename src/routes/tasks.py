@@ -1,6 +1,5 @@
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required, current_user
-from prompt_toolkit.input.win32 import raw_mode
 
 from src.services import UserService
 from src.services import TaskService

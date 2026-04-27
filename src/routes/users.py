@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, current_app
 from flask_jwt_extended import create_access_token, jwt_required, current_user, get_jwt
 
-from src.init import redis_client
+from src.init_instance import redis_client
 from src.services import UserService
 
 users_bp = Blueprint('users', __name__)
@@ -28,7 +28,7 @@ def register():
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
     except Exception as e:
-        return jsonify({'error': '注册失败'}), 500
+        return jsonify({'error': '注册失败'+str(e)}), 500
 
 @users_bp.route('/login', methods=['POST'])
 def login():

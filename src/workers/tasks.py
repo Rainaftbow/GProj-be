@@ -4,7 +4,7 @@ import requests
 from datetime import datetime, timezone
 from flask import current_app
 
-from src.init import db
+from src.init_instance import db
 from src.app import celery
 from src.models.task import Task
 from src.services.task_service import TaskService

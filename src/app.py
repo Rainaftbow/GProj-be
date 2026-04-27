@@ -2,19 +2,18 @@ import eventlet
 eventlet.monkey_patch()
 
 import os
-import sys
 from pathlib import Path
 from dotenv import load_dotenv
 root_dir = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(root_dir))
-load_dotenv(dotenv_path='.env')
+env_path = root_dir / '.env'
+load_dotenv(dotenv_path=env_path, override=False)
 
 import redis
 from flask import Flask, jsonify
 from flask_cors import CORS
 from celery import Celery
 
-from src.init import db, jwt, redis_client
+from src.init_instance import db, jwt, redis_client
 from src.config import config
 from src.services import UserService
 
@@ -76,7 +75,7 @@ def create_app(config_name=None):
     from src.routes.tasks import tasks_bp
     from src.routes.files import files_bp
 
-    app.register_blueprint(users_bp, url_prefix='/api/v1/auth')
+    app.register_blueprint(users_bp, url_prefix='/api/v1/users')
     app.register_blueprint(tasks_bp, url_prefix='/api/v1/tasks')
     app.register_blueprint(files_bp, url_prefix='/api/v1/files')
 
@@ -136,7 +135,7 @@ celery = make_celery(app)
 from src.workers import tasks
 
 if __name__ == '__main__':
-    # 创建数据库表
+    # 本地调试
     with app.app_context():
         db.create_all()
 

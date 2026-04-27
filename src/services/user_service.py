@@ -1,4 +1,4 @@
-from src.init import db
+from src.init_instance import db
 from src.models import User
 
 

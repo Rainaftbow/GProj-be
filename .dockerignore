@@ -1,0 +1,10 @@
+.dockerignore
+.run
+.idea
+.venv
+instance
+uploads
+.env
+.gitignore
+dump.rdb
+README.md

@@ -2,7 +2,7 @@ from redis.commands.search import field
 from sqlalchemy import or_
 from flask import current_app
 
-from src.init import db
+from src.init_instance import db
 from src.models import Task
 
 

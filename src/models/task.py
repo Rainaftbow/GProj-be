@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from src.init import db
+from src.init_instance import db
 
 
 class Task(db.Model):
